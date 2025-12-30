@@ -1,12 +1,16 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
+// TEMP: Hardcoded credentials for testing
+const supabaseUrl = 'https://zrjznebxxtlhykyaizaf.supabase.co';
+const supabaseAnonKey = 'sb_publishable_trplQLyMWTwlTIKykYzgNA_ubB1y0hY';
+
 export async function createClient() {
     const cookieStore = await cookies();
 
     return createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseAnonKey,
         {
             cookies: {
                 get(name: string) {

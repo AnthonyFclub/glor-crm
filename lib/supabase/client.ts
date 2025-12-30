@@ -1,7 +1,7 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-// Supabase project credentials from environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// TEMP: Hardcoded credentials for testing
+const supabaseUrl = 'https://zrjznebxxtlhykyaizaf.supabase.co';
+const supabaseAnonKey = 'sb_publishable_trplQLyMWTwlTIKykYzgNA_ubB1y0hY';
 
 export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
