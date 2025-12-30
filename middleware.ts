@@ -2,8 +2,8 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 // Supabase project credentials
-const supabaseUrl = 'https://zrjznebxxtikykaizaf.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyanpuZWJ4eHRpa3lrYWl6YWYiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczNTUzNzE3OSwiZXhwIjoyMDUxMTEzMTc5fQ.wYwxQsghh2NQYqQl9j6wHBAOdKlCHXiVKGFjXL6vqhA';
+const supabaseUrl = 'https://zrjznebxxtlhykyaizaf.supabase.co';
+const supabaseAnonKey = 'sb_publishable_trplQLyMWTwlTIKykYzgNA_ubB1y0hY';
 
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
