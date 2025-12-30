@@ -35,59 +35,227 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="fixed inset-0 w-full h-full overflow-auto bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800">
-            <div className="min-h-screen w-full flex items-center justify-center p-4">
-                <div className="w-full max-w-md">
-                    <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <html>
+            <head>
+                <title>Login - GLOR CRM</title>
+                <style>{`
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    .login-page {
+                        min-height: 100vh;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+                        padding: 20px;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    }
+                    .login-card {
+                        width: 100%;
+                        max-width: 450px;
+                        background: white;
+                        border-radius: 16px;
+                        padding: 48px 40px;
+                        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                    }
+                    .logo-container {
+                        display: flex;
+                        justify-content: center;
+                        margin-bottom: 32px;
+                    }
+                    .logo {
+                        width: 80px;
+                        height: 80px;
+                        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+                        border-radius: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 36px;
+                        font-weight: bold;
+                    }
+                    .title {
+                        text-align: center;
+                        margin-bottom: 8px;
+                        font-size: 32px;
+                        font-weight: 700;
+                        color: #1f2937;
+                    }
+                    .subtitle {
+                        text-align: center;
+                        margin-bottom: 32px;
+                        font-size: 16px;
+                        color: #6b7280;
+                    }
+                    .error-box {
+                        background: #fef2f2;
+                        border: 1px solid #fecaca;
+                        border-radius: 8px;
+                        padding: 16px;
+                        margin-bottom: 24px;
+                        color: #dc2626;
+                        font-size: 14px;
+                    }
+                    .form-group {
+                        margin-bottom: 24px;
+                    }
+                    .label {
+                        display: block;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #374151;
+                        margin-bottom: 8px;
+                    }
+                    .input {
+                        width: 100%;
+                        padding: 14px 16px;
+                        font-size: 16px;
+                        border: 2px solid #e5e7eb;
+                        border-radius: 10px;
+                        outline: none;
+                        transition: border-color 0.2s, box-shadow 0.2s;
+                        background: #f9fafb;
+                    }
+                    .input:focus {
+                        border-color: #2563eb;
+                        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+                        background: white;
+                    }
+                    .input:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                    }
+                    .password-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 8px;
+                    }
+                    .forgot-link {
+                        font-size: 14px;
+                        color: #2563eb;
+                        text-decoration: none;
+                        font-weight: 500;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                    }
+                    .forgot-link:hover {
+                        color: #1d4ed8;
+                        text-decoration: underline;
+                    }
+                    .submit-btn {
+                        width: 100%;
+                        padding: 16px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: white;
+                        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: transform 0.2s, box-shadow 0.2s;
+                        margin-top: 8px;
+                    }
+                    .submit-btn:hover:not(:disabled) {
+                        transform: translateY(-2px);
+                        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+                    }
+                    .submit-btn:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                    }
+                    .spinner {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        border: 2px solid rgba(255,255,255,0.3);
+                        border-radius: 50%;
+                        border-top-color: white;
+                        animation: spin 1s linear infinite;
+                        margin-right: 10px;
+                        vertical-align: middle;
+                    }
+                    @keyframes spin {
+                        to { transform: rotate(360deg); }
+                    }
+                    .footer {
+                        margin-top: 32px;
+                        padding-top: 24px;
+                        border-top: 1px solid #e5e7eb;
+                        text-align: center;
+                    }
+                    .footer p {
+                        font-size: 13px;
+                        color: #9ca3af;
+                        margin-bottom: 4px;
+                    }
+                    @media (max-width: 480px) {
+                        .login-card {
+                            padding: 32px 24px;
+                        }
+                        .logo {
+                            width: 64px;
+                            height: 64px;
+                            font-size: 28px;
+                        }
+                        .title {
+                            font-size: 26px;
+                        }
+                    }
+                `}</style>
+            </head>
+            <body>
+                <div className="login-page">
+                    <div className="login-card">
                         {/* Logo */}
-                        <div className="flex justify-center mb-8">
-                            <div className="h-20 w-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-                                <span className="text-white font-bold text-3xl">G</span>
-                            </div>
+                        <div className="logo-container">
+                            <div className="logo">G</div>
                         </div>
 
                         {/* Title */}
-                        <div className="text-center mb-8">
-                            <h1 className="text-3xl font-bold text-gray-900">GLOR CRM</h1>
-                            <p className="text-gray-500 mt-2">Bienes Raíces Dashboard</p>
-                        </div>
+                        <h1 className="title">GLOR CRM</h1>
+                        <p className="subtitle">Bienes Raíces Dashboard</p>
 
-                        {/* Error Message */}
+                        {/* Error */}
                         {error && (
-                            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                                <p className="text-sm text-red-600">{error}</p>
-                            </div>
+                            <div className="error-box">{error}</div>
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleLogin} className="space-y-6">
-                            {/* Email Field */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        <form onSubmit={handleLogin}>
+                            {/* Email */}
+                            <div className="form-group">
+                                <label className="label" htmlFor="email">
                                     Correo Electrónico
                                 </label>
                                 <input
                                     id="email"
                                     type="email"
-                                    required
+                                    className="input"
+                                    placeholder="tu@email.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                                    placeholder="tu@email.com"
                                     disabled={loading}
+                                    required
                                 />
                             </div>
 
-                            {/* Password Field */}
-                            <div>
-                                <div className="flex items-center justify-between mb-2">
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            {/* Password */}
+                            <div className="form-group">
+                                <div className="password-header">
+                                    <label className="label" htmlFor="password" style={{ marginBottom: 0 }}>
                                         Contraseña
                                     </label>
                                     <button
                                         type="button"
+                                        className="forgot-link"
                                         onClick={() => router.push('/recuperar-password')}
-                                        className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                                     >
                                         ¿Olvidaste tu contraseña?
                                     </button>
@@ -95,29 +263,22 @@ export default function LoginPage() {
                                 <input
                                     id="password"
                                     type="password"
-                                    required
+                                    className="input"
+                                    placeholder="••••••••"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                                    placeholder="••••••••"
                                     disabled={loading}
+                                    required
                                 />
                             </div>
 
-                            {/* Submit Button */}
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                            >
+                            {/* Submit */}
+                            <button type="submit" className="submit-btn" disabled={loading}>
                                 {loading ? (
-                                    <span className="flex items-center justify-center">
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
+                                    <>
+                                        <span className="spinner"></span>
                                         Iniciando sesión...
-                                    </span>
+                                    </>
                                 ) : (
                                     'Iniciar Sesión'
                                 )}
@@ -125,13 +286,13 @@ export default function LoginPage() {
                         </form>
 
                         {/* Footer */}
-                        <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-                            <p className="text-xs text-gray-500">© 2025 GLOR Bienes Raíces</p>
-                            <p className="text-xs text-gray-400 mt-1">Todos los derechos reservados</p>
+                        <div className="footer">
+                            <p>© 2025 GLOR Bienes Raíces</p>
+                            <p>Todos los derechos reservados</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </body>
+        </html>
     );
 }
