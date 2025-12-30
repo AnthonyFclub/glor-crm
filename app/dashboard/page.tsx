@@ -1,5 +1,5 @@
 import DashboardLayout from '@/components/layout/DashboardLayout';
-import { Users, TrendingUp, DollarSign, AlertCircle, Calendar, Home as HomeIcon, TrendDown } from 'lucide-react';
+import { Users, TrendingUp, DollarSign, AlertCircle, Calendar, Home as HomeIcon } from 'lucide-react';
 
 export default function DashboardPage() {
     return (
