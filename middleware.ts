@@ -4,6 +4,23 @@ import { createServerClient } from '@supabase/ssr';
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
+    // Skip middleware for login and public routes if Supabase is not configured
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    // If Supabase is not configured, allow access to login and public routes
+    if (!supabaseUrl || !supabaseAnonKey) {
+        // Allow login page without Supabase
+        if (pathname === '/login' || pathname === '/recuperar-password') {
+            return NextResponse.next();
+        }
+        // For protected routes, redirect to login
+        if (pathname !== '/login') {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+        return NextResponse.next();
+    }
+
     // Create a response
     let response = NextResponse.next({
         request: {
@@ -13,8 +30,8 @@ export async function middleware(request: NextRequest) {
 
     // Create Supabase client
     const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseAnonKey,
         {
             cookies: {
                 get(name: string) {
@@ -91,6 +108,7 @@ export const config = {
     matcher: [
         '/',
         '/login',
+        '/recuperar-password',
         '/dashboard/:path*',
         '/contactos/:path*',
         '/actividades/:path*',
