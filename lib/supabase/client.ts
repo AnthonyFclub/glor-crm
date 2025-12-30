@@ -1,33 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+// Supabase project credentials
+const supabaseUrl = 'https://zrjznebxxtikykaizaf.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyanpuZWJ4eHRpa3lrYWl6YWYiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczNTUzNzE3OSwiZXhwIjoyMDUxMTEzMTc5fQ.wYwxQsghh2NQYqQl9j6wHBAOdKlCHXiVKGFjXL6vqhA';
 
-// Create a mock client if env vars are missing (for development/testing)
-const createSupabaseClient = () => {
-    if (!supabaseUrl || !supabaseAnonKey) {
-        console.warn('Supabase environment variables not configured. Using mock client.');
-        // Return a mock client that won't crash but will show errors on auth attempts
-        return {
-            auth: {
-                signInWithPassword: async () => ({
-                    data: { session: null, user: null },
-                    error: { message: 'Supabase no está configurado. Por favor configure las variables de entorno.' }
-                }),
-                signOut: async () => ({ error: null }),
-                getSession: async () => ({ data: { session: null }, error: null }),
-                onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => { } } } }),
-            },
-        } as any;
-    }
-
-    return createClient(supabaseUrl, supabaseAnonKey, {
-        auth: {
-            autoRefreshToken: true,
-            persistSession: true,
-            detectSessionInUrl: true,
-        },
-    });
-};
-
-export const supabase = createSupabaseClient();
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true,
+    },
+});

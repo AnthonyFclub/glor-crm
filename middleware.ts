@@ -1,25 +1,12 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
+// Supabase project credentials
+const supabaseUrl = 'https://zrjznebxxtikykaizaf.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyanpuZWJ4eHRpa3lrYWl6YWYiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczNTUzNzE3OSwiZXhwIjoyMDUxMTEzMTc5fQ.wYwxQsghh2NQYqQl9j6wHBAOdKlCHXiVKGFjXL6vqhA';
+
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
-
-    // Skip middleware for login and public routes if Supabase is not configured
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    // If Supabase is not configured, allow access to login and public routes
-    if (!supabaseUrl || !supabaseAnonKey) {
-        // Allow login page without Supabase
-        if (pathname === '/login' || pathname === '/recuperar-password') {
-            return NextResponse.next();
-        }
-        // For protected routes, redirect to login
-        if (pathname !== '/login') {
-            return NextResponse.redirect(new URL('/login', request.url));
-        }
-        return NextResponse.next();
-    }
 
     // Create a response
     let response = NextResponse.next({
